@@ -1,0 +1,59 @@
+import type { RaceSchedule } from '@/types'
+
+export default function RaceScheduleSection({ schedule }: { schedule: RaceSchedule[] }) {
+  if (!schedule.length) return null
+
+  return (
+    <section className="section-pad" id="races">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-12">
+          <p className="text-[0.7rem] font-medium tracking-[0.38em] uppercase text-[#e8621a] mb-2">Next Up</p>
+          <h2 className="font-[family-name:var(--font-title)] text-[clamp(2.4rem,4vw,4rem)] font-bold leading-none tracking-[0.04em] uppercase text-black">
+            Game <em className="not-italic text-[#e8621a]">Day</em>
+          </h2>
+          <p className="text-[0.9rem] font-light text-[#8a8880] mt-3 max-w-lg mx-auto leading-[1.75]">
+            Here's where your horses run next. Hit us up and we'll sort your race day pass.
+          </p>
+        </div>
+
+        <div className="space-y-3 mt-10">
+          {schedule.map((race) => (
+            <div
+              key={race._id}
+              className="grid grid-cols-[80px_1fr_1fr_auto] items-center gap-6 p-5 rounded-xl bg-white border border-[#e2e0dc] hover:border-[#e8621a]/40 hover:translate-x-1 transition-all duration-300"
+            >
+              {/* Date */}
+              <div className="text-center">
+                <div className="font-[family-name:var(--font-title)] text-2xl font-bold text-[#e8621a] leading-none">
+                  {race.day}
+                </div>
+                <div className="text-[0.6rem] font-medium tracking-[0.15em] uppercase text-[#8a8880] mt-1">
+                  {race.month}
+                </div>
+              </div>
+
+              {/* Horse & Race */}
+              <div>
+                <p className="font-[family-name:var(--font-title)] text-base font-bold uppercase tracking-[0.06em] text-black">
+                  {race.horse}
+                </p>
+                <p className="text-[0.75rem] font-light text-[#8a8880] mt-0.5">{race.race}</p>
+              </div>
+
+              {/* Venue & Distance */}
+              <div className="hidden md:block">
+                <p className="text-[0.78rem] text-[#6a6a62]">{race.venue}</p>
+                <p className="text-[0.68rem] text-[#8a8880] mt-0.5">{race.distance}</p>
+              </div>
+
+              {/* Status */}
+              <span className="text-[0.58rem] font-semibold tracking-[0.14em] uppercase bg-[#e8621a] text-white px-3 py-1.5 rounded whitespace-nowrap">
+                {race.status}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
